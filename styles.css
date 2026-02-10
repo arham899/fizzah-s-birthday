@@ -1,0 +1,1359 @@
+/* ===================================
+   Digital Renaissance Birthday Website
+   Sunset Palette Edition
+   =================================== */
+
+:root {
+    /* Sunset Palette */
+    --peach: #F8B195;
+    --coral: #F67280;
+    --mauve: #C06C84;
+    --plum: #6C5B7B;
+    --deep-blue: #355C7D;
+
+    /* Derived Colors */
+    --bg-dark: #1a1520;
+    --bg-darker: #120e17;
+    --bg-card: rgba(28, 22, 35, 0.75);
+    --text-light: #faf0e6;
+    --text-muted: #c9b8d4;
+
+    /* Typography */
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+
+    /* Effects */
+    --blur-glass: 24px;
+    --transition-smooth: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===================================
+   Reset & Base Styles
+   =================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-darker);
+    color: var(--text-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Music Toggle */
+.music-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(250, 240, 230, 0.2);
+    background: rgba(28, 22, 35, 0.85);
+    backdrop-filter: blur(8px);
+    color: var(--peach);
+    font-size: 1.3rem;
+    cursor: pointer;
+    z-index: 9998;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-toggle:hover {
+    border-color: var(--coral);
+    transform: scale(1.1);
+}
+
+.music-toggle.playing {
+    animation: spin-slow 3s linear infinite;
+    border-color: var(--coral);
+    box-shadow: 0 0 20px rgba(246, 114, 128, 0.3);
+}
+
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Top Nav Bar */
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.8rem 2rem;
+    background: rgba(28, 22, 35, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(250, 240, 230, 0.08);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    font-family: 'Bungee', cursive;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--peach);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--peach);
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+::selection {
+    background: var(--coral);
+    color: var(--bg-darker);
+}
+
+/* ===================================
+   Section Base
+   =================================== */
+
+.section {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg) var(--spacing-md);
+}
+
+/* ===================================
+   Countdown Section – Pixel Art Style
+   =================================== */
+
+#countdown-section {
+    background: var(--bg-darker);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background Video */
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.4;
+}
+
+/* Ambient gradient glow behind the timer */
+#countdown-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(ellipse 60% 40% at 50% 45%, rgba(246, 114, 128, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 30% 60%, rgba(108, 91, 123, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 70% 40%, rgba(248, 177, 149, 0.10) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Subtle pixel-grid scanlines */
+#countdown-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent 3px,
+            rgba(255, 255, 255, 0.015) 3px,
+            rgba(255, 255, 255, 0.015) 4px),
+        repeating-linear-gradient(90deg,
+            transparent,
+            transparent 3px,
+            rgba(255, 255, 255, 0.01) 3px,
+            rgba(255, 255, 255, 0.01) 4px);
+    pointer-events: none;
+    z-index: 1;
+    animation: scanlines 10s linear infinite;
+}
+
+@keyframes scanlines {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(4px);
+    }
+}
+
+.pixel-container {
+    text-align: center;
+    z-index: 2;
+    position: relative;
+}
+
+.pixel-border {
+    width: 85%;
+    max-width: 720px;
+    height: 3px;
+    margin: 0 auto var(--spacing-md);
+    background: linear-gradient(135deg, var(--peach), var(--coral), var(--mauve), var(--plum), var(--deep-blue));
+    border-radius: 2px;
+    box-shadow:
+        0 0 12px rgba(246, 114, 128, 0.5),
+        0 0 30px rgba(246, 114, 128, 0.2);
+}
+
+.pixel-title {
+    font-family: var(--font-mono);
+    font-size: clamp(1.4rem, 4.5vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    color: var(--peach);
+    text-shadow:
+        0 0 20px rgba(248, 177, 149, 0.4),
+        2px 2px 0 rgba(108, 91, 123, 0.5);
+    margin-bottom: var(--spacing-xs);
+}
+
+.pixel-subtitle {
+    font-family: var(--font-mono);
+    font-size: clamp(0.8rem, 1.8vw, 1.1rem);
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Timer Grid */
+.timer-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-lg) 0;
+    flex-wrap: wrap;
+}
+
+.timer-unit {
+    background: rgba(28, 22, 35, 0.85);
+    border: 2px solid var(--mauve);
+    padding: var(--spacing-md);
+    min-width: 120px;
+    border-radius: 4px;
+    box-shadow:
+        inset 0 0 30px rgba(0, 0, 0, 0.4),
+        0 0 25px rgba(192, 108, 132, 0.2);
+    transition: all var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shimmer across each timer box */
+.timer-unit::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(248, 177, 149, 0.06), transparent);
+    animation: timerShimmer 4s ease-in-out infinite;
+}
+
+@keyframes timerShimmer {
+
+    0%,
+    100% {
+        transform: translateX(-50%);
+    }
+
+    50% {
+        transform: translateX(50%);
+    }
+}
+
+.timer-unit:hover {
+    transform: scale(1.06) translateY(-4px);
+    border-color: var(--coral);
+    box-shadow:
+        inset 0 0 30px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(246, 114, 128, 0.35);
+}
+
+.timer-value {
+    font-family: var(--font-mono);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    color: var(--peach);
+    line-height: 1;
+    text-shadow: 0 0 24px rgba(248, 177, 149, 0.5);
+    position: relative;
+    z-index: 1;
+}
+
+.timer-label {
+    font-family: var(--font-mono);
+    font-size: clamp(0.65rem, 1.4vw, 0.85rem);
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    margin-top: var(--spacing-xs);
+    position: relative;
+    z-index: 1;
+}
+
+.timer-separator {
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--coral);
+    font-weight: 700;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    49% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0.25;
+    }
+}
+
+/* Pixel Decoration */
+.pixel-decoration {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+}
+
+.pixel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    animation: pixelPulse 2.5s ease-in-out infinite;
+}
+
+.pixel-dot:nth-child(1) {
+    background: var(--coral);
+    box-shadow: 0 0 12px var(--coral);
+}
+
+.pixel-dot:nth-child(2) {
+    background: var(--mauve);
+    box-shadow: 0 0 12px var(--mauve);
+    animation-delay: 0.4s;
+}
+
+.pixel-dot:nth-child(3) {
+    background: var(--deep-blue);
+    box-shadow: 0 0 12px var(--deep-blue);
+    animation-delay: 0.8s;
+}
+
+@keyframes pixelPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: scale(0.7);
+    }
+}
+
+/* ===================================
+   Birthday Message (Hidden initially)
+   =================================== */
+
+.birthday-message {
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    padding-top: 10vh;
+}
+
+.birthday-message.hidden {
+    display: none;
+}
+
+.glitch-text {
+    font-family: 'Bungee', cursive;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 400;
+    color: var(--peach);
+    position: relative;
+    letter-spacing: 0.04em;
+    animation: glitchReveal 2s ease-out forwards;
+    text-shadow:
+        2px 2px 0 var(--coral),
+        4px 4px 0 var(--mauve),
+        6px 6px 0 var(--plum),
+        8px 8px 0 rgba(53, 92, 125, 0.5),
+        0 0 40px rgba(246, 114, 128, 0.3);
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-text::before {
+    color: var(--coral);
+    animation: glitch 0.3s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    text-shadow:
+        2px 2px 0 var(--mauve),
+        4px 4px 0 var(--plum);
+}
+
+.glitch-text::after {
+    color: var(--deep-blue);
+    animation: glitch 0.3s infinite reverse;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    text-shadow:
+        2px 2px 0 var(--mauve),
+        4px 4px 0 var(--plum);
+}
+
+@keyframes glitchReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) rotateX(-90deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateX(0);
+    }
+}
+
+@keyframes glitch {
+
+    0%,
+    100% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+    }
+}
+
+.subtitle-text {
+    font-family: 'Bungee', cursive;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: var(--text-muted);
+    margin-top: var(--spacing-sm);
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 1s forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scroll-indicator {
+    margin-top: var(--spacing-xl);
+    color: var(--mauve);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 1.5s forwards;
+}
+
+.scroll-arrow {
+    font-size: 2rem;
+    animation: bounce 2s infinite;
+    margin-top: var(--spacing-sm);
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+/* ===================================
+   Open Letter Button
+   =================================== */
+
+.letter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: var(--spacing-lg);
+    padding: 0.75rem 2rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    background: transparent;
+    border: 1px solid rgba(250, 240, 230, 0.25);
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 1.2s forwards;
+    z-index: 2;
+}
+
+.letter-btn::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--peach);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease;
+}
+
+.letter-btn:hover {
+    border-color: rgba(250, 240, 230, 0.5);
+    color: var(--peach);
+}
+
+.letter-btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.letter-btn-icon {
+    font-size: 1.1rem;
+}
+
+/* ===================================
+   Love Letter Modal
+   =================================== */
+
+.letter-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.letter-modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.letter-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(12, 8, 16, 0.85);
+    backdrop-filter: blur(8px);
+}
+
+.letter-envelope {
+    position: relative;
+    width: 90%;
+    max-width: 620px;
+    max-height: 85vh;
+    overflow-y: auto;
+    transform: scale(0.8) translateY(40px);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.letter-modal.open .letter-envelope {
+    transform: scale(1) translateY(0);
+}
+
+.letter-paper {
+    background:
+        linear-gradient(180deg, #faf0e6 0%, #f5e6d3 30%, #f0dcc8 70%, #ebe0d0 100%);
+    border-radius: 4px;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    position: relative;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(180, 160, 130, 0.3),
+        inset 0 0 80px rgba(160, 130, 100, 0.15);
+}
+
+/* Aged paper edges */
+.letter-paper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 4px;
+    background:
+        radial-gradient(ellipse at top left, rgba(180, 150, 110, 0.2), transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(160, 130, 100, 0.25), transparent 50%);
+    pointer-events: none;
+}
+
+/* Faint ruled lines */
+.letter-paper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 4px;
+    background: repeating-linear-gradient(180deg,
+            transparent,
+            transparent 34px,
+            rgba(180, 160, 140, 0.18) 34px,
+            rgba(180, 160, 140, 0.18) 35px);
+    pointer-events: none;
+}
+
+.letter-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    background: rgba(28, 22, 35, 0.75);
+    border: 1px solid var(--mauve);
+    border-radius: 50%;
+    color: var(--peach);
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.letter-close:hover {
+    background: var(--coral);
+    color: var(--bg-darker);
+    transform: rotate(90deg);
+}
+
+.letter-stamp {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2.5rem;
+    opacity: 0.7;
+    transform: rotate(12deg);
+}
+
+.letter-date {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1rem;
+    color: #8a7060;
+    margin-bottom: 1.8rem;
+    position: relative;
+    z-index: 1;
+}
+
+.letter-greeting {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+    color: #5a3e2b;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.letter-body {
+    position: relative;
+    z-index: 1;
+}
+
+.letter-body p {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    line-height: 2;
+    color: #4a3828;
+    margin-bottom: 1rem;
+    text-indent: 2rem;
+}
+
+.letter-closing {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem, 2.8vw, 1.5rem);
+    font-weight: 700;
+    color: #5a3e2b;
+    margin-top: 2rem;
+    margin-bottom: 0.3rem;
+    position: relative;
+    z-index: 1;
+}
+
+.letter-signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: var(--coral);
+    position: relative;
+    z-index: 1;
+}
+
+/* ===================================
+   History Vault Section
+   =================================== */
+
+#history-vault {
+    background: var(--bg-dark);
+    position: relative;
+    padding: var(--spacing-xl) var(--spacing-md);
+    min-height: auto;
+    display: block;
+    isolation: isolate;
+}
+
+.background-texture {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(ellipse 60% 50% at 25% 50%, rgba(192, 108, 132, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 75% 50%, rgba(53, 92, 125, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.vault-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(250, 240, 230, 0.008) 2px,
+            rgba(250, 240, 230, 0.008) 4px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Timeline Connector */
+.timeline-connector {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.connector-path {
+    fill: none;
+    filter: drop-shadow(0 0 6px rgba(192, 108, 132, 0.35));
+}
+
+.vault-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+    z-index: 2;
+}
+
+.section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    color: var(--peach);
+    margin-bottom: var(--spacing-sm);
+    letter-spacing: 0.02em;
+}
+
+.section-subtitle {
+    font-family: var(--font-serif);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ===================================
+   Timeline Years – Modern Card Design
+   =================================== */
+
+.timeline-year {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    padding: var(--spacing-lg) 0;
+}
+
+.year-content {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    align-items: center;
+    padding: 0 var(--spacing-md);
+}
+
+.year-content.left {
+    justify-items: start;
+}
+
+.year-content.right {
+    justify-items: end;
+}
+
+/* Year Badge – Big numeral */
+.year-badge {
+    font-family: var(--font-serif);
+    font-size: clamp(5rem, 14vw, 11rem);
+    font-weight: 900;
+    color: var(--plum);
+    line-height: 0.85;
+    margin-bottom: var(--spacing-sm);
+    opacity: 0.25;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+/* Dark mask behind badge text so connector line is hidden */
+.year-badge::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -15px;
+    right: -15px;
+    bottom: -5px;
+    background: var(--bg-dark);
+    border-radius: 8px;
+    z-index: -1;
+}
+
+.timeline-year:hover .year-badge {
+    color: var(--coral);
+    opacity: 0.45;
+    text-shadow: 0 0 40px rgba(246, 114, 128, 0.2);
+}
+
+/* Content Card – Glassmorphism with gradient border */
+.content-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(var(--blur-glass));
+    border: 1px solid rgba(192, 108, 132, 0.2);
+    border-radius: 20px;
+    padding: var(--spacing-lg);
+    max-width: 680px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(248, 177, 149, 0.06);
+}
+
+/* Gradient border on hover */
+.content-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, var(--peach), var(--coral), var(--mauve), var(--plum), var(--deep-blue));
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.6s ease;
+}
+
+/* Soft inner glow top-left */
+.content-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(ellipse at top left, rgba(248, 177, 149, 0.06), transparent 70%);
+    pointer-events: none;
+    border-radius: 20px;
+}
+
+.content-card:hover {
+    border-color: transparent;
+    transform: translateY(-8px);
+    box-shadow:
+        0 24px 64px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(246, 114, 128, 0.3),
+        0 0 60px rgba(192, 108, 132, 0.12);
+}
+
+.content-card:hover::before {
+    opacity: 0.6;
+}
+
+.year-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    color: var(--peach);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+}
+
+.year-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--peach), var(--coral), var(--mauve));
+    margin-top: var(--spacing-xs);
+    border-radius: 2px;
+}
+
+.portrait-frame {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 2px solid rgba(192, 108, 132, 0.25);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    box-shadow:
+        inset 0 0 30px rgba(0, 0, 0, 0.4),
+        0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.9) contrast(1.05);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.content-card:hover .portrait-img {
+    filter: saturate(1.1) contrast(1.1);
+    transform: scale(1.06);
+}
+
+.description {
+    font-family: var(--font-serif);
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    line-height: 1.85;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.description p {
+    margin-bottom: var(--spacing-sm);
+}
+
+.description-placeholder {
+    color: var(--mauve);
+    opacity: 0.6;
+    font-size: 0.9rem;
+}
+
+/* Finale Card (2026) */
+.content-card.finale {
+    border-color: rgba(246, 114, 128, 0.35);
+    background: linear-gradient(135deg, rgba(28, 22, 35, 0.9) 0%, rgba(246, 114, 128, 0.08) 100%);
+}
+
+.content-card.finale:hover {
+    box-shadow:
+        0 24px 64px rgba(246, 114, 128, 0.25),
+        0 0 80px rgba(246, 114, 128, 0.15);
+}
+
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1s;
+    border-radius: 20px;
+}
+
+/* ===================================
+   Memories Section
+   =================================== */
+
+#memories-section {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+    padding: var(--spacing-xl) 0;
+    min-height: auto;
+    display: block;
+    position: relative;
+}
+
+.memories-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding: 0 var(--spacing-md);
+}
+
+.memories-gallery {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: 0 var(--spacing-md) var(--spacing-xl);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    cursor: grab;
+}
+
+.memories-gallery::-webkit-scrollbar {
+    height: 6px;
+}
+
+.memories-gallery::-webkit-scrollbar-track {
+    background: rgba(28, 22, 35, 0.6);
+    border-radius: 3px;
+}
+
+.memories-gallery::-webkit-scrollbar-thumb {
+    background: var(--mauve);
+    border-radius: 3px;
+}
+
+.memories-gallery::-webkit-scrollbar-thumb:hover {
+    background: var(--coral);
+}
+
+.memory-card {
+    min-width: 320px;
+    max-width: 320px;
+    scroll-snap-align: start;
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(192, 108, 132, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(60px);
+    flex-shrink: 0;
+}
+
+.memory-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.memory-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    border-color: var(--coral);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(246, 114, 128, 0.15);
+}
+
+.memory-image {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.memory-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.85) contrast(1.05);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.memory-card:hover .memory-image img {
+    filter: saturate(1.15) contrast(1.1);
+    transform: scale(1.08);
+}
+
+.memory-caption {
+    padding: var(--spacing-md);
+}
+
+.memory-caption h4 {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--peach);
+    margin-bottom: var(--spacing-xs);
+}
+
+.memory-caption p {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* ===================================
+   Footer
+   =================================== */
+
+.site-footer {
+    background: var(--bg-darker);
+    text-align: center;
+    padding: var(--spacing-lg) var(--spacing-md);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--plum);
+    border-top: 1px solid rgba(108, 91, 123, 0.2);
+}
+
+/* ===================================
+   Responsive Design
+   =================================== */
+
+@media (min-width: 768px) {
+    .year-content {
+        grid-template-columns: auto 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .year-content.right {
+        grid-template-columns: 1fr auto;
+    }
+
+    .year-content.right .year-badge {
+        order: 2;
+    }
+
+    .year-content.right .content-card {
+        order: 1;
+    }
+}
+
+@media (min-width: 1024px) {
+    .memories-gallery {
+        padding: 0 var(--spacing-xl) var(--spacing-xl);
+        gap: var(--spacing-lg);
+    }
+
+    .memory-card {
+        min-width: 380px;
+        max-width: 380px;
+    }
+}
+
+@media (max-width: 767px) {
+    .timer-grid {
+        gap: var(--spacing-xs);
+    }
+
+    .timer-unit {
+        min-width: 75px;
+        padding: var(--spacing-sm);
+    }
+
+    .year-content.left,
+    .year-content.right {
+        justify-items: center;
+        text-align: center;
+    }
+
+    .year-badge {
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .content-card {
+        padding: var(--spacing-md);
+    }
+
+    .year-title::after {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .memory-card {
+        min-width: 280px;
+        max-width: 280px;
+    }
+}
+
+/* ===================================
+   Utility Classes
+   =================================== */
+
+.hidden {
+    display: none !important;
+}
+
+.countdown-active .birthday-message {
+    display: none;
+}
+
+.countdown-complete #timer,
+.countdown-complete .pixel-title,
+.countdown-complete .pixel-subtitle,
+.countdown-complete .pixel-border,
+.countdown-complete .pixel-decoration {
+    display: none;
+}
+
+.countdown-complete .birthday-message {
+    display: block !important;
+}
+
+/* ===================================
+   Video Edit Section
+   =================================== */
+
+#video-edit-section {
+    background: var(--bg-darker);
+    padding: var(--spacing-xl) var(--spacing-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.video-edit-container {
+    max-width: 360px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.video-edit-title {
+    font-family: 'Bungee', cursive;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    color: var(--peach);
+    margin-bottom: var(--spacing-lg);
+    text-shadow:
+        2px 2px 0 var(--coral),
+        4px 4px 0 var(--plum);
+}
+
+.video-edit-box {
+    border: 1px solid rgba(250, 240, 230, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow:
+        0 8px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(246, 114, 128, 0.08);
+}
+
+.edit-video {
+    width: 100%;
+    display: block;
+}

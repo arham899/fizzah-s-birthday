@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! 🎉</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bungee&family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Background Music -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="Voh Dekhnay Mein London, Paris, New York 128 Kbps.mp3" type="audio/mpeg">
+    </audio>
+    <button id="music-toggle" class="music-toggle" title="Play/Pause Music">🎵</button>
+
+    <!-- Top Nav Bar -->
+    <nav class="top-nav">
+        <a href="#countdown-section" class="nav-link">Home</a>
+        <a href="#history-vault" class="nav-link">Art Gallery</a>
+        <a href="#video-edit-section" class="nav-link">Gift</a>
+    </nav>
+
+    <!-- Countdown Section -->
+    <section id="countdown-section" class="section countdown-active">
+        <!-- Background Video -->
+        <video class="bg-video" autoplay muted loop playsinline>
+            <source src="From KlickPin CF Pin by Rae on Videography _ Film texture Filmmaking ideas Flower video.mp4"
+                type="video/mp4">
+        </video>
+        <div class="pixel-container">
+            <div class="pixel-border"></div>
+            <h1 class="pixel-title">COUNTDOWN TO</h1>
+            <h2 class="pixel-subtitle">BIRTHDAY CELEBRATION</h2>
+
+            <div id="timer" class="timer-grid">
+                <div class="timer-unit">
+                    <div class="timer-value" id="days">00</div>
+                    <div class="timer-label">DAYS</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <div class="timer-value" id="hours">00</div>
+                    <div class="timer-label">HOURS</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <div class="timer-value" id="minutes">00</div>
+                    <div class="timer-label">MINUTES</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <div class="timer-value" id="seconds">00</div>
+                    <div class="timer-label">SECONDS</div>
+                </div>
+            </div>
+
+            <div class="pixel-decoration">
+                <div class="pixel-dot"></div>
+                <div class="pixel-dot"></div>
+                <div class="pixel-dot"></div>
+            </div>
+        </div>
+
+        <!-- Birthday Message (shown when countdown ends) -->
+        <div id="birthday-message" class="birthday-message hidden">
+            <h1 class="glitch-text" data-text="Happy 20th">Happy 20th</h1>
+            <p class="subtitle-text">to the love of my life :)</p>
+            <button id="open-letter-btn" class="letter-btn">
+                <span class="letter-btn-icon">💌</span>
+                <span>Open Your Letter</span>
+            </button>
+            <div class="scroll-indicator">
+                <span>Scroll to explore</span>
+                <div class="scroll-arrow">↓</div>
+            </div>
+        </div>
+
+        <!-- Love Letter Modal -->
+        <div id="letter-modal" class="letter-modal">
+            <div class="letter-backdrop"></div>
+            <div class="letter-envelope">
+                <button id="close-letter-btn" class="letter-close">&times;</button>
+                <div class="letter-paper">
+                    <div class="letter-stamp"></div>
+                    <p class="letter-date">February 12, 2026</p>
+                    <p class="letter-greeting">My Dearest Love,</p>
+                    <div class="letter-body">
+                        <p>On this beautiful day, I want you to know how incredibly blessed I feel to have you in my
+                            life. Every moment with you is a treasure, every smile of yours a sunrise that brightens my
+                            world.</p>
+                        <p>You are my favorite hello and my hardest goodbye. The way you laugh, the way you care, the
+                            way you make even ordinary days feel magical, it all makes me fall in love with you a
+                            little more each day.</p>
+                        <p>Happy Birthday, my love. May this year bring you as much happiness as you bring to everyone
+                            around you, especially me.</p>
+                    </div>
+                    <p class="letter-closing">Forever and Always Yours,</p>
+                    <p class="letter-signature">apka arham :)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Vault Section -->
+    <section id="history-vault" class="section">
+        <div class="background-texture"></div>
+        <div class="vault-overlay"></div>
+
+        <!-- Wiggly Timeline Connector -->
+        <svg class="timeline-connector" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="wigglyGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#F8B195" />
+                    <stop offset="25%" stop-color="#F67280" />
+                    <stop offset="50%" stop-color="#C06C84" />
+                    <stop offset="75%" stop-color="#6C5B7B" />
+                    <stop offset="100%" stop-color="#355C7D" />
+                </linearGradient>
+            </defs>
+            <path class="connector-path" stroke="url(#wigglyGrad)" stroke-width="2.5" stroke-linecap="round" />
+        </svg>
+
+        <div class="vault-header">
+            <h2 class="section-title">The History Vault</h2>
+            <p class="section-subtitle">A Journey Through Time</p>
+        </div>
+
+        <!-- Year 2021 -->
+        <div class="timeline-year year-2021" data-year="2021">
+            <div class="year-content left">
+                <div class="year-badge">2021</div>
+                <div class="content-card">
+                    <h3 class="year-title">The Beginning</h3>
+                    <div class="portrait-frame">
+                        <img src="WhatsApp Image 2026-02-11 at 00.01.44.jpeg" alt="Portrait 2021" class="portrait-img">
+                    </div>
+                    <div class="description">
+                        <p>In the twilight of a new beginning, where dreams took their first breath and the canvas of
+                            life awaited its first brushstroke...</p>
+                        <p class="description-placeholder">[Your poetic description for 2021 goes here]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Year 2022 -->
+        <div class="timeline-year year-2022" data-year="2022">
+            <div class="year-content right">
+                <div class="year-badge">2022</div>
+                <div class="content-card">
+                    <h3 class="year-title">The Unfolding</h3>
+                    <div class="portrait-frame">
+                        <img src="Screenshot 2026-02-11 010239.png" alt="Portrait 2022" class="portrait-img">
+                    </div>
+                    <div class="description">
+                        <p>As seasons turned and chapters unfolded, new stories were written in the book of moments...
+                        </p>
+                        <p class="description-placeholder">[Your poetic description for 2022 goes here]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Year 2023 -->
+        <div class="timeline-year year-2023" data-year="2023">
+            <div class="year-content left">
+                <div class="year-badge">2023</div>
+                <div class="content-card">
+                    <h3 class="year-title">The Adventure</h3>
+                    <div class="portrait-frame">
+                        <img src="Screenshot 2026-02-11 010356.png" alt="Portrait 2023" class="portrait-img">
+                    </div>
+                    <div class="description">
+                        <p>Through winding paths and unexpected turns, adventures painted the days with vibrant hues...
+                        </p>
+                        <p class="description-placeholder">[Your poetic description for 2023 goes here]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Year 2024 -->
+        <div class="timeline-year year-2024" data-year="2024">
+            <div class="year-content right">
+                <div class="year-badge">2024</div>
+                <div class="content-card">
+                    <h3 class="year-title">The Awakening</h3>
+                    <div class="portrait-frame">
+                        <img src="Screenshot 2026-02-11 010900.png" alt="Portrait 2024" class="portrait-img">
+                    </div>
+                    <div class="description">
+                        <p>In the dance of light and shadow, new perspectives illuminated the familiar...</p>
+                        <p class="description-placeholder">[Your poetic description for 2024 goes here]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Year 2025 -->
+        <div class="timeline-year year-2025" data-year="2025">
+            <div class="year-content left">
+                <div class="year-badge">2025</div>
+                <div class="content-card">
+                    <h3 class="year-title">The Flourishing</h3>
+                    <div class="portrait-frame">
+                        <img src="Screenshot 2026-02-11 011025.png" alt="Portrait 2025" class="portrait-img">
+                    </div>
+                    <div class="description">
+                        <p>Like gardens in full bloom, life blossomed with beauty and grace...</p>
+                        <p class="description-placeholder">[Your poetic description for 2025 goes here]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Year 2026 -->
+        <div class="timeline-year year-2026" data-year="2026">
+            <div class="year-content right">
+                <div class="year-badge">2026</div>
+                <div class="content-card finale">
+                    <h3 class="year-title">The Celebration</h3>
+                    <div class="portrait-frame">
+                        <img src="assets/placeholder.jpg" alt="Portrait 2026" class="portrait-img">
+                    </div>
+                    <div class="description">
+                        <p>And here we stand at this moment, celebrating the masterpiece that is your journey...</p>
+                        <p class="description-placeholder">[Your poetic description for 2026 goes here]</p>
+                    </div>
+                    <div class="confetti-container" id="confetti"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Video Edit Section -->
+    <section id="video-edit-section" class="section">
+        <video class="bg-video" autoplay muted loop playsinline>
+            <source
+                src="From KlickPin CF Looping Soft Smooth Gradient Motion Background for Wallpaper _ Fundos em movimento Ideias de culto Ideias para apresentações.mp4"
+                type="video/mp4">
+        </video>
+        <div class="video-edit-container">
+            <h2 class="video-edit-title">Here's a lil edit for you :)</h2>
+            <div class="video-edit-box">
+                <video class="edit-video" controls playsinline>
+                    <source src="from the prettiest fit check.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>Made with ❤️ for a special celebration</p>
+    </footer>
+
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
